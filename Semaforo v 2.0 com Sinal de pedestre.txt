@@ -1,0 +1,68 @@
+// Semaforo feito por Eduardo
+//
+void setup()
+
+#define SINALG 3
+#define SINALR 5
+#define SINALG2 7
+#define SINALR2 9
+#define ledGREEN 12
+#define ledYELLOW 10
+#define ledRED 8
+#define othergreen 6
+#define otheryellow 4
+#define otherred 2
+  
+{
+  pinMode(SINALR, OUTPUT);
+  pinMode(SINALG, OUTPUT);
+  pinMode(SINALR2, OUTPUT);
+  pinMode(SINALG2, OUTPUT);
+  
+  pinMode(othergreen, OUTPUT);
+  pinMode(otheryellow, OUTPUT);
+  pinMode(otherred, OUTPUT);
+  pinMode(ledRED, OUTPUT);
+  pinMode(ledYELLOW, OUTPUT);
+  pinMode(ledGREEN, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(otherred, HIGH);
+  digitalWrite(SINALR, HIGH);
+  digitalWrite(SINALG2, HIGH);
+  digitalWrite(ledGREEN, HIGH);
+  delay(3000); 
+  digitalWrite(ledGREEN, LOW);
+  
+  
+  digitalWrite(ledYELLOW, HIGH);
+  delay(2000);   
+  digitalWrite(ledYELLOW, LOW);
+  digitalWrite(othergreen, HIGH);
+  digitalWrite(otherred, LOW);
+  digitalWrite(SINALR, LOW);
+  digitalWrite(SINALG2, LOW);
+
+  digitalWrite(SINALG, HIGH);
+  digitalWrite(SINALR2, HIGH);
+  digitalWrite(ledRED, HIGH);
+
+  delay(3000); 
+  digitalWrite(ledRED, LOW);
+  digitalWrite(othergreen, LOW);
+  
+  digitalWrite(otheryellow, HIGH);
+  digitalWrite(ledRED, HIGH);
+  delay (2000);
+  digitalWrite(otheryellow, LOW);
+  digitalWrite(SINALG, LOW);
+  digitalWrite(SINALR2, LOW);
+
+  
+  
+  digitalWrite(otherred, HIGH);
+  digitalWrite(ledRED, LOW);
+  digitalWrite(otherred, LOW);
+  
