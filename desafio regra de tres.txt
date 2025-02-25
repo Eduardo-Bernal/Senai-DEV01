@@ -1,0 +1,24 @@
+// Qual a Proporçao entre os numeros
+//
+
+float resultadoInicial = 0;
+float resultado = 0;
+float numeroA = 80;
+float paraMaior = 100;
+float paraMenor = 50;
+float deMaior = 500;
+float deMenor = 50;
+
+void setup () 
+{
+  Serial.begin(9600);
+  resultadoInicial = (numeroA - deMenor) * ((paraMaior - paraMenor)/(deMaior - deMenor));
+  resultado = paraMenor + resultadoInicial;
+  Serial.println(resultado);
+  
+  // Remapeamento
+  resultado = map (numeroA, deMenor, deMaior, paraMenor, paraMaior);
+  //map (valor, deMenor, deMaior, paraMenor, paraMaior)
+  Serial.println(resultado);
+
+}

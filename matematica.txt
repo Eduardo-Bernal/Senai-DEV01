@@ -1,0 +1,130 @@
+/*
+Eduardo Bernal
+Matematica
+Data: 24/02/2025
+Descrição: Este codigo ...
+*/
+
+//*****DECLARAÇÃO DE VARIAVEIS GLOBAIS*****
+
+int numeroA = 17;
+int numeroB = 4;
+int resultado = 0;
+float resultadoReal = 0;
+
+
+void setup()
+{
+  
+  Serial.begin(9600);
+  
+  
+ //***SOMA****
+resultado = numeroA + numeroB;
+Serial.print("A soma do numero A com numero B e: ");
+Serial.println(resultado);
+  
+ //***subtraçao****
+resultado = numeroB - numeroA;
+Serial.print("A subtraçao do numero A com numero B e: ");
+Serial.println(resultado);
+  
+  
+//***Multiplicaçao****
+ resultado = numeroA * numeroB;
+   Serial.print ("A multiplicaçao do numero A com numero B e: ");
+   Serial.println(resultado);
+
+  //***Divisao****
+  
+  resultado = numeroA/numeroB;
+  Serial.print ("A divisao do numero A com numero B e: ");
+  Serial.println(resultado);
+  resultado = numeroA%numeroB;
+  Serial.print ("e sobra: ");
+  Serial.println(resultado);
+  resultadoReal = (float)numeroA / (float)numeroB;
+  Serial.print("Ou ");
+  Serial.println(resultadoReal, 1);// Limitado o resultado   
+                                 // em uma casa decimal
+  
+  //*****POTENCIA***
+  resultado = pow(numeroA,numeroB);// 'A elevado a B'
+  Serial.print("Numero A elevado a numero B e: ");
+  Serial.println(resultado);
+  
+  
+  
+  
+  //*****QUADRADO****
+  resultado = sq(numeroA); //numeroA eleavo ao quadrado
+  Serial.print("numero A ao quadrado e: ");
+  Serial.println(resultado);
+    
+  //***RAIZ QUADRADA
+  resultado = sqrt(numeroA);
+  Serial.print("A raiz quadrada de numero A e: ");
+  Serial.println(resultadoReal);
+  
+  //****ABSOLUTO
+  resultado = abs (numeroA * -7);
+ Serial.print("o resultado absoluto e: ");
+  Serial.println(resultadoReal);
+  
+  //****Restricao
+ resultado = constrain(numeroA, -3, 5); //restringe a varialvel
+  Serial.println(resultado);                                        // aos limites -3 e 5
+ 
+  //****REMAPEAMENTO
+  
+  resultadoReal = map (numeroA, 0 , 20, 0, 10);
+  //map(valor, demenor, demaior, paramenor, paramaior)
+  Serial.println(resultadoReal);
+  
+  
+  //operadores de atribuicao
+  //numeroA = numeroA + 58;
+  numeroA+= 58;
+  Serial.println(numeroA += 58);
+  
+  //numeroA = numeroA - 58;
+  numeroA -= 58;
+  
+  Serial.println(numeroA -= 58);
+  
+  
+  Serial.println(numeroA *= 58);
+  
+  Serial.println(numeroA /= 58);
+  
+  
+  //INCREMENTAR A variavel
+  //numeroA = numeroA + 1;
+  numeroA++; //pos
+  ++numeroA; //pre
+    Serial.println(numeroA++);
+    Serial.println(++numeroA);
+
+  
+  //DECREMENTAR A variavel
+  //numeroA = numeroA - 1;
+  numeroA--;
+  --numeroA;
+  Serial.println(numeroA--);
+    Serial.println(--numeroA);
+  
+  
+  
+  
+  
+  
+}
+
+void loop()
+{
+  
+  
+  
+  
+  
+}
