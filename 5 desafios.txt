@@ -1,0 +1,119 @@
+// C++ code
+//
+void setup()
+{
+  /*
+  Serial.begin(9600);
+  
+int numero = 2;
+  if(numero < 0){
+Serial.print("Seu numero e negativo");
+  }
+  
+if(numero > 0){
+Serial.print("Seu numero e positivo");
+}
+  */
+  
+//desafio 2
+  /*
+  Serial.begin(9600);
+String funcionario = "Eduardo";
+  String cargo = "Dono";
+  int salario = 980;
+int salarioReajustado = 0;
+  if(salario < 1000){
+      salarioReajustado = salario * 1.10;
+
+    Serial.print("Seu salario foi reajustado para seu cargo : ");
+  Serial.println(salarioReajustado);
+    Serial.println(funcionario);
+    Serial.println(cargo);
+    Serial.println(salarioReajustado);
+*/
+
+  
+  
+  //desafio 3
+  
+  
+  /*
+  Serial.begin(9600);
+  int salario = 480;
+  int salarioReajustado = 0;
+  if(salario < 500){
+      salarioReajustado = salario * 1.30;
+    Serial.print("Seu salario foi reajustado para : ");
+  Serial.println(salarioReajustado);
+    
+  }
+  
+    else if (salario > 500){
+    Serial.println("Voce nao tem direito a aumento : ");
+    }
+  */
+  
+  
+  //desafio 4
+  
+  
+  /*
+  Serial.begin(9600);
+  int valor1 = 500;
+  int valor2 = 1230;
+  
+  if(valor1 > valor2){
+    Serial.print("O numero maior e: ");
+  Serial.print(valor1);
+  }
+  
+  else if(valor1 < valor2){
+    Serial.print("O numero maior e: ");
+  Serial.print(valor2);
+  
+  }
+
+  */
+  
+  
+  //desafio 5
+  
+  Serial.begin(9600);
+  float nota1 = 6;
+  float nota2 = 6;
+  float nota3 = 2;
+  float nota4 = 10;
+  float resultadofinal = 0; 
+  
+  resultadofinal = (nota1 + nota2 + nota3 + nota4) / 4;
+  if(resultadofinal > 5 && resultadofinal < 7){
+  Serial.print("Voce esta de recuperacao:");
+    Serial.print(resultadofinal, 2);
+  }
+   
+  else if(resultadofinal < 5)
+    Serial.print("Voce foi reprovado sua media e:");
+    Serial.print(resultadofinal, 2);
+  
+    
+    
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
+void loop()
+{
+  
+}
