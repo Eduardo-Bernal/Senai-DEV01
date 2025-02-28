@@ -1,0 +1,46 @@
+// C++ code
+//
+
+int numero =  2;
+  
+void setup()
+{
+
+int resultado = 0;
+int valor = 900;
+pinMode(13, OUTPUT);
+  
+ 
+  Serial.begin(9600);
+  
+
+ resultado = map (valor, 0, 1023, 0, 100);
+  
+  
+  resultado = constrain (resultado, 20, 80);
+  digitalWrite(13, HIGH);
+  Serial.print ("O Valor :") ;
+    Serial.print(valor);
+   Serial.print(" excedeu os limites,valor reajustado para ");
+        Serial.println(resultado);
+
+  
+  
+   
+  pinMode(8, OUTPUT); 
+  int valor2 = 6;
+  int resultado2 = (valor2 % 2);
+    if(resultado2 == 0){
+    digitalWrite(8, HIGH);
+  
+  
+  
+  
+  }
+  
+}
+
+void loop()
+{
+  
+  
