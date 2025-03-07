@@ -1,0 +1,70 @@
+// C++ code
+//
+
+#define led2 4
+#define led3 2
+#define led1 6
+
+
+const unsigned long tempoVerde = 3000;
+const unsigned long tempoAmarelo = 2000;
+const unsigned long tempoVermelho = 5000;
+
+unsigned long tempoAtual;
+unsigned long tempoInicial;
+
+
+int estado = 0;
+
+ bool estadoLed1 = 0;
+  bool estadoLed2 = 0;
+  bool estadoLed3 = 0;
+
+void setup()
+{
+  pinMode(led3, OUTPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+ 
+
+  Serial.begin(9600);
+  
+  
+
+}
+
+void loop()
+{
+tempoAtual = millis();
+  
+  
+  if (estado == 0) {
+    digitalWrite(led1, HIGH);
+    digitalWrite(led2, LOW);
+    digitalWrite(led3, LOW);
+    if (tempoAtual - tempoInicial >= tempoVerde) {
+      tempoInicial = tempoAtual;
+      estado = 1;
+    }
+  }
+  
+  else if (estado == 1) {
+    digitalWrite(led1, LOW);
+    digitalWrite(led2, HIGH);
+    digitalWrite(led3, LOW);
+    if (tempoAtual - tempoInicial >= tempoAmarelo) {
+      tempoInicial = tempoAtual;
+      estado = 2;
+    }
+  }
+  
+  else if (estado == 2) {
+    digitalWrite(led1, LOW);
+    digitalWrite(led2, LOW);
+    digitalWrite(led3, HIGH);
+    if (tempoAtual - tempoInicial >= tempoVermelho) {
+      tempoInicial = tempoAtual;
+      estado = 0;
+    }
+  }
+}
