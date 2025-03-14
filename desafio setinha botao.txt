@@ -1,0 +1,32 @@
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup()
+{
+  lcd.init();
+  lcd.backlight();
+  Serial.begin(9600);
+  lcd.setCursor(1, 0);
+  lcd.print("Scorpion");
+  lcd.setCursor(1, 1);
+  lcd.print("Sub-Zero  ");
+  
+}
+
+void loop()
+{
+  Serial.println(analogRead(A0));
+  if (analogRead(A0)== 0){
+  lcd.setCursor(0, 0);
+  lcd.print (">");
+    lcd.setCursor(0, 1);
+  lcd.print (" ");
+  }
+  else if (analogRead(A0)>= 130 && analogRead(A0)<= 159 ){
+  lcd.setCursor(0, 1);
+  lcd.print (">");
+    lcd.setCursor(0, 0);
+  lcd.print (" ");
+  }
+ 
+}
