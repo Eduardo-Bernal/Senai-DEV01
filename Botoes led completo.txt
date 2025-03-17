@@ -1,0 +1,169 @@
+#include <LiquidCrystal_I2C.h>
+#define ledVerde 10
+#define ledVerm 11
+#define botao A0
+
+#define valor1  0
+#define valor2  145
+#define valor3 329
+#define valor4 505
+#define valor5 741
+
+
+int leitura;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup()
+{
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledVerm, OUTPUT);
+  
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(1,0);
+  lcd.print("Verde OFF");
+  lcd.setCursor(1,1);
+  lcd.print("Vermelho OFF");
+  
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  	
+ /* if (leitura >= 990) { 
+    
+    lcd.print("Nenhum  ");
+  }
+  
+  if (leitura == valor1) lcd.print("Primeiro");
+ 
+  
+  if (leitura >= valor2 * 0.9  && leitura <= valor2 * 1.1) 
+  lcd.print("Segundo ");
+  
+  if (leitura >= valor3 * 0.9 && leitura <= valor3 * 1.1) 
+  lcd.print("Terceiro");
+  
+  if (leitura >= valor4 * 0.9 && leitura <= valor4 * 1.1) 
+  lcd.print("Quarto  ");
+  
+  if (leitura >= valor5 * 0.9 && leitura <= valor5 * 1.1) 
+  lcd.print("Quinto  ");*/
+  
+  
+ // -----------------------Botoes------------------------------
+  
+  static bool posicao;
+  static int valorAnterior = 1023;
+  static bool estadoLedVerde = 0;
+  static bool estadoLedVerm = 0;
+  static int brilho = 0;
+  static int num = 255 * 0.1;
+  brilho = constrain(brilho, 0, 255);
+  
+  
+  
+	leitura = analogRead(botao);
+  
+  //Botao 1 Verde
+  if (valorAnterior == 1023 && leitura == valor1)  posicao = 0;
+    
+ 	 
+  
+  //Botao 2 Vermelho
+   else if (valorAnterior == 1023 && leitura >= valor2 * 0.9 && leitura <= valor2 * 1.1)  
+     posicao = 1;
+     
+     
+     
+     
+     //Botao 3 diminui
+     else if (valorAnterior == 1023 && leitura >= valor3 * 0.9 && leitura <= valor3 * 1.1) 
+     brilho = brilho - num;
+   
+     
+   
+     
+     
+    //Botao 4 aumenta
+   else if (valorAnterior == 1023 && leitura >= valor4 * 0.9 && leitura <= valor4 * 1.1) 
+     brilho = brilho + num;
+     
+     
+     
+   	
+  
+  //Botao 5
+  else if( valorAnterior == 1023 && leitura >= (valor5 * 0.9) && leitura <= (valor5 * 1.1))
+  
+	if(posicao == 0)  estadoLedVerm = !estadoLedVerm;
+    
+     else  estadoLedVerde = !estadoLedVerde;
+    
+  	
+   valorAnterior = leitura;
+  
+  
+     
+     
+     
+     
+  // ----------------------LCD------------
+  
+  
+    if(posicao == 0) {
+    
+   lcd.setCursor(0,0);
+    lcd.print(">");
+    lcd.setCursor(0,1);
+    lcd.print(" ");
+    
+  } else {
+  
+  lcd.setCursor(0,1);
+    lcd.print(">");
+    lcd.setCursor(0,0);
+    lcd.print(" ");
+    
+  }
+  
+  
+  
+  
+  if(estadoLedVerde){
+  	lcd.setCursor(10,1);
+      lcd.print("ON ");
+    lcd.setCursor(13, 1);  
+    lcd.print(brilho);  
+  } else {
+  lcd.setCursor(10,1);
+      lcd.print("OFF ");
+  }
+  
+     
+  if(estadoLedVerm){
+  lcd.setCursor(7,0);
+  	lcd.print("ON ");
+    lcd.setCursor(10, 0);  
+    lcd.print(brilho);  
+  } else {
+  lcd.setCursor(7,0);
+  	lcd.print("OFF ");
+  }
+     
+  
+  //--------------------------------- LEDS -----------------------
+  if(estadoLedVerde == 1 && posicao == 1)analogWrite(ledVerde, brilho);
+  
+  
+  if(estadoLedVerm == 1 && posicao == 0) analogWrite(ledVerm, brilho);
+
+     
+  Serial.println(brilho);   
+  //Serial.println(posicao);
+  //Serial.println(analogRead(botao));
+  //Serial.println(valorAnterior);
+   } 
+   
