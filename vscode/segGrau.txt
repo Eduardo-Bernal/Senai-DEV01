@@ -17,10 +17,10 @@ void loop()
 int calculoSegGrau(int a, int b, int c)
 {
   int resultado;
-  int raiz;
-  raiz = (sqrt(sq(b)) - (4 * a * c));
+  int delta;
+  delta = sqrt((b * b) - (4 * a * c));
 
-  resultado = (abs(b * -1)) + raiz / (2*a);
+  resultado = (-b + delta) / (2 * a);
 
   return resultado;
 }
