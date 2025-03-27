@@ -1,0 +1,50 @@
+#include <Arduino.h>
+const int pinLed = 18;
+void setup()
+{
+  pinMode(pinLed, OUTPUT);
+  pinMode(23, INPUT_PULLUP);
+  Serial.begin(115200);
+}
+
+void loop()
+{
+  static bool acao = 1;
+  static bool estadoLed = 1;
+  static int cont = 0;
+  bool botaoAtual = digitalRead(23);
+  static bool botaoAnt = 0;
+  static unsigned long debounceAnt;
+  unsigned long tempoAtual = millis();
+  const unsigned long tempoDebounce = 50;
+  if (botaoAtual != botaoAnt)
+  {
+    debounceAnt = millis();
+  }
+  if ((tempoAtual - debounceAnt) > tempoDebounce)
+  {
+    if (botaoAtual != acao)
+    {
+      acao = botaoAtual;
+      if (!botaoAtual)
+      {
+        digitalWrite(pinLed, HIGH);
+        cont++;
+        Serial.println(cont);
+      }
+      else
+      {
+        digitalWrite(pinLed, LOW);
+      }
+    }
+  }
+  if (cont == 10)
+  {
+    digitalWrite(pinLed, HIGH);
+    delay(100);
+    digitalWrite(pinLed, LOW);
+    delay(100);
+  }
+
+  botaoAnt = botaoAtual;
+}

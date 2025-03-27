@@ -1,0 +1,39 @@
+#include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,20,4);
+const int pinLed = 2;
+
+
+void setup() {
+  pinMode(pinLed, OUTPUT);
+Serial.begin(115200);
+lcd.init(); 
+lcd.backlight();
+lcd.setCursor(0, 0);
+lcd.print("LED ESP");
+
+}
+
+void loop() {
+  static bool estadoLed = 0;
+  bool botaoAtual = digitalRead(0);
+  static bool botaoAnt = 0;
+  if (botaoAtual && !botaoAnt){
+    estadoLed = !estadoLed;
+  digitalWrite(pinLed, estadoLed);
+  }
+  else{
+  digitalWrite(pinLed, estadoLed);
+   botaoAnt = botaoAtual;
+}
+   botaoAnt = botaoAtual;
+
+   if(estadoLed == 1){
+    lcd.setCursor(8, 0);
+    lcd.print("ON ");
+  }
+ else{
+    lcd.setCursor(8, 0);
+    lcd.print("OFF");
+  }
+}
