@@ -1,0 +1,68 @@
+#include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h> 
+
+LiquidCrystal_I2C lcd(0x27,20,4); 
+
+#define sw 23
+#define dt 19
+#define clk 18
+
+
+void setup()
+{
+  pinMode(sw, INPUT);
+  pinMode(dt, INPUT);
+
+  lcd.init();
+  lcd.backlight();
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int cont;
+  static bool EstadoAntA = digitalRead(dt);
+  static bool EstadoAntB = digitalRead(clk);
+  bool EstadoA = digitalRead(dt);
+  bool EstadoB = digitalRead(clk);
+
+    if (EstadoA != EstadoAntA)
+    {
+      if (EstadoAntB != EstadoA)
+        {
+        cont++ ;
+        }
+        else
+        {
+        cont--;
+        }
+        Serial.print("Numero: ");
+        Serial.println(cont);
+      
+    }
+    EstadoAntA = EstadoA;
+}
+
+
+
+
+
+
+
+  /*if (estadoAtualS1 != estadoAnteriorS1 || estadoAtualS2 != estadoAnteriorS2)
+  {
+    estadoAnteriorS1 = estadoAtualS1;
+    estadoAnteriorS2 = estadoAtualS2;
+
+    Serial.print(digitalRead(dt));
+    Serial.print(" ");
+    Serial.println(digitalRead(clk));
+    if (estadoAtualS1 && estadoAtualS2)
+    {
+      Serial.println("----------");
+    }
+
+    
+  }*/
