@@ -1,0 +1,43 @@
+#include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+
+LiquidCrystal_I2C lcd(0x27, 20, 4); 
+
+#define canalA 19 //CLK
+#define canalB 18 //DT
+
+const int8_t tabelaTransicao[4][4] = {
+/*
++1 horario          //SENTIDO HORARIO      1 0 2 3
+0 parado            //SENTIDO ANTI-HORARIO 3 2 0 1             
+-1 antihorario
+*/
+                                
+   //ESTADO ATUAL               
+    /*0  1  2  3*/  
+   {0, -1, 1, 0},  /*estado anterior estava em 0*/
+   {1, 0, 0, -1},  /*estado anterior estava em 1*/
+   {-1, 0, 0, 1},  /*estado anterior estava em 2*/
+   {0, 1, -1, 0}   /*estado anterior estava em 3*/ 
+
+};
+
+void setup() {
+  Serial.begin(9600);
+pinMode(canalA, INPUT);
+pinMode(canalB, INPUT);
+}
+
+void loop() {
+  bool leituraCanalA = digitalRead(canalA);
+  bool leituraCanalB = digitalRead(canalB);
+  int estadoAtualEncoder = ((leituraCanalA << 1)| leituraCanalB); // ROTACIONA O NUMERO DEIXANDO APENAS UM NUMERO AO INVEZ DE DOIS
+  static int  estadoAnteriorEncoder = 3;
+  static int posicao = 0;
+  posicao = posicao + tabelaTransicao[estadoAnteriorEncoder][estadoAtualEncoder];
+  Serial.println(posicao / 4);
+
+  estadoAnteriorEncoder = estadoAtualEncoder;
+}
+
