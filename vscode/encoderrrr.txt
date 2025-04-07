@@ -1,0 +1,144 @@
+#include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
+#include <Bounce2.h>
+
+LiquidCrystal_I2C lcd(0x27, 20, 4); 
+
+void updateEncoder();
+static int contador = 0;
+
+#define canalA 19 //CLK
+#define canalB 18 //DT
+#define Botao 23  //SW
+
+Bounce botaoEncoder = Bounce();
+
+
+const int8_t tabelaTransicao[4][4] = {
+/*
++1 horario          //SENTIDO HORARIO      1 0 2 3
+0 parado            //SENTIDO ANTI-HORARIO 3 2 0 1             
+-1 antihorario
+*/
+                                
+   //ESTADO ATUAL               
+    /*0  1  2  3*/  
+   {0, -1, 1, 0},  /*estado anterior estava em 0*/
+   {1, 0, 0, -1},  /*estado anterior estava em 1*/
+   {-1, 0, 0, 1},  /*estado anterior estava em 2*/
+   {0, 1, -1, 0}   /*estado anterior estava em 3*/ 
+
+};
+
+void setup() {
+  Serial.begin(9600);
+pinMode(canalA, INPUT);
+pinMode(canalB, INPUT);
+botaoEncoder.attach(Botao, INPUT);
+
+lcd.init();
+lcd.backlight();
+lcd.setCursor(2, 0);
+lcd.print("LED 1");
+lcd.setCursor(2, 1);
+lcd.print("LED 2");
+lcd.setCursor(2, 2);
+lcd.print("LED 3");
+lcd.setCursor(2, 3);
+lcd.print("LED 4");
+
+}
+
+
+void loop() {
+updateEncoder();
+botaoEncoder.update();
+
+
+
+
+
+switch (contador)
+{
+case 0:
+    lcd.setCursor(0, 3);
+    lcd.print(' ');
+    lcd.setCursor(0, 2);
+    lcd.print(' ');
+    lcd.setCursor(0, 1);
+    lcd.print(' ');
+    lcd.setCursor(0, 0);
+    lcd.print('>');
+    break;
+case 1:
+    lcd.setCursor(0, 0);
+    lcd.print(' ');
+    lcd.setCursor(0, 2);
+    lcd.print(' ');
+    lcd.setCursor(0, 3);
+    lcd.print(' ');
+    lcd.setCursor(0, 1);
+    lcd.print('>');
+    break;
+case 2:
+    lcd.setCursor(0, 0);
+    lcd.print(' ');
+    lcd.setCursor(0, 1);
+    lcd.print(' ');
+    lcd.setCursor(0, 3);
+    lcd.print(' ');
+    lcd.setCursor(0, 2);
+    lcd.print('>');
+    break;
+case 3:
+    lcd.setCursor(0, 0);
+    lcd.print(' ');
+    lcd.setCursor(0, 1);
+    lcd.print(' ');
+    lcd.setCursor(0, 2);
+    lcd.print(' ');
+    lcd.setCursor(0, 3);
+    lcd.print('>');
+    break;
+
+default:
+    break;
+}
+
+
+
+
+void updateEncoder();
+bool leituraCanalA = digitalRead(canalA);
+bool leituraCanalB = digitalRead(canalB);
+
+int estadoAtualEncoder = ((leituraCanalA << 1)| leituraCanalB); // ROTACIONA O NUMERO 
+static int  estadoAnteriorEncoder = 3;
+static int  posicao = 0;
+
+posicao = posicao + tabelaTransicao[estadoAnteriorEncoder][estadoAtualEncoder];
+Serial.println(posicao);
+
+if (posicao > 3){
+  posicao = 0;
+  contador ++;
+} else if (posicao < 0){
+  posicao = 3;
+  contador --;
+}
+
+if (contador < 0){
+  contador = 3;
+} else if (contador > 3){
+  contador = 0;
+}
+
+Serial.println(contador);
+
+estadoAnteriorEncoder = estadoAtualEncoder;
+}
+
+
+
+
+
