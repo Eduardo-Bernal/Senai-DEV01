@@ -1,0 +1,113 @@
+#include <Arduino.h>
+#include "BluetoothSerial.h"
+#define led 2
+
+BluetoothSerial SerialBT;
+
+void setup() {
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+  SerialBT.begin("odirlei"); // Nome do dispositivo Bluetooth
+  Serial.println("ESP32 Slave pronto e esperando conexão...");
+}
+
+void loop() {
+  static bool estadoLed = 0;
+  if (SerialBT.available()) {
+    String msg = SerialBT.readStringUntil('\r');
+    Serial.print("Recebido: ");
+    Serial.println(msg);
+
+    if (msg.equals("liga")) {
+      estadoLed = 1;
+      SerialBT.println("Led ligado");
+      Serial.println("Respondido: Led ligado");
+      Serial.println(estadoLed);
+      msg = "";
+
+    }
+    else if (msg.equals("desliga")) {
+      estadoLed = 0;
+      SerialBT.println("Led desligado");
+      Serial.println("Respondido: Led desligado");
+      Serial.println(estadoLed);
+      msg = "";
+
+    }
+    
+    
+  }
+  if (estadoLed == 1)
+  {
+    digitalWrite(led, HIGH);
+
+  }
+  if (estadoLed == 0)
+  {
+    digitalWrite(led, LOW);
+  }
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #include "BluetoothSerial.h"
+
+// BluetoothSerial SerialBT;
+
+// #define led 2
+// //ESP SLAVE
+// void setup() {
+//   Serial.begin(9600);
+//   SerialBT.begin("ADAGOMILTON");
+//   Serial.println("Esperando a conexao Bluetooth");
+  
+//   }
+  
+//   void loop() {
+//    if(SerialBT.available())
+//    {
+//     String mensagem = SerialBT.readStringUntil('\r');
+//     Serial.printf("mensagem recebida %s", mensagem);
+  
+//     if (mensagem.equals("ping"))
+//     {
+//       SerialBT.print("pong\n\r");
+//     }
+    
+  
+//    }
+  
+//   }

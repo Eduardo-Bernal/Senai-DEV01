@@ -1,0 +1,150 @@
+#include <Arduino.h>
+#include <ESP32Servo.h>
+#include <DHT.h>
+
+#define DHTPIN 18
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+Servo servo;
+
+void setup()
+{
+  Serial.begin(9600);
+  dht.begin();
+  servo.attach(4);
+}
+
+void loop()
+{
+  float temp = dht.readTemperature();
+  float umidade = dht.readHumidity();
+
+  if (isnan(temp) || isnan(umidade))
+  {
+    Serial.println("Erro ao ler o sensor");
+    return;
+  }
+
+  Serial.print("Temperatura: ");
+  Serial.print(temp);
+  Serial.print(" °C\t");
+
+  Serial.print("Umidade: ");
+  Serial.print(umidade);
+  Serial.println(" %");
+
+  // Lógica de controle combinada:
+  if (temp > 30.0 || umidade > 60.0)
+  {
+    servo.write(170);
+  }
+  else
+  {
+    servo.write(10);
+  }
+
+  delay(2000); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #include <Arduino.h>
+// #include <ESP32Servo.h>
+// #include <DHT.h>
+
+// #define DHTPIN 18
+// #define DHTTYPE DHT22
+
+// DHT dht(DHTPIN, DHTTYPE);
+// Servo servo;
+
+// void setup()
+// {
+//   Serial.begin(9600);
+//   dht.begin();
+//   servo.attach(4);
+// }
+
+// void loop()
+// {
+//   float temp = dht.readTemperature();
+
+//   if (isnan(temp))
+//   {
+//     Serial.println("Erro ao ler o sensor");
+//     return;
+//   }
+
+//   Serial.print("Temperatura atual é: ");
+//   Serial.print(temp);
+//   Serial.println(" °C");
+
+//   if (temp > 30.0)
+//   {
+//     servo.write(170);
+//   }
+//   else
+//   {
+//     servo.write(10);
+//   }
+
+//   delay(2000); 
+// }
+
+// #include <Arduino.h>
+// #include <ESP32Servo.h>
+// #include <DHT.h>
+
+// #define DHTPIN 18
+// #define DHTTYPE DHT22
+
+// DHT dht(DHTPIN, DHTTYPE);
+// Servo servo;
+
+// void setup()
+// {
+//   Serial.begin(9600);
+//   dht.begin();
+//   servo.attach(4);
+// }
+
+// void loop()
+// {
+//   float umidade = dht.readHumidity();
+
+//   if (isnan(umidade))
+//   {
+//     Serial.println("Erro ao ler o sensor");
+//     return;
+//   }
+
+//   Serial.print("Umidade atual é: ");
+//   Serial.print(umidade);
+//   Serial.println(" %");
+
+//   if (umidade > 60.0)
+//   {
+//     servo.write(170);
+//   }
+//   else if (umidade < 60.0)
+//   {
+//     servo.write(10);
+//   }
+
+//   delay(2000); 
+// }
+

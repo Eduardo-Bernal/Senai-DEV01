@@ -1,0 +1,58 @@
+#include <Arduino.h>
+#include <ESP32Servo.h>
+#include <DHT.h>
+
+const int botao = 27;
+const int botao2 = 33; 
+#define DHTPIN 18
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+Servo servo;
+
+bool estadoAnteriorBotao1 = HIGH;
+bool estadoAnteriorBotao2 = HIGH;
+
+void setup()
+{
+  pinMode(botao, INPUT_PULLUP);
+  pinMode(botao2, INPUT_PULLUP); // funciona corretamente com pino 25
+  Serial.begin(9600);
+  dht.begin();
+  servo.attach(4);
+}
+
+void loop()
+{
+  float temp = dht.readTemperature();
+
+  if (isnan(temp))
+  {
+    Serial.println("Erro ao ler o sensor");
+    return;
+  }
+
+  bool estadoAtualBotao1 = digitalRead(botao);
+  bool estadoAtualBotao2 = digitalRead(botao2);
+
+  if (estadoAnteriorBotao1 == HIGH && estadoAtualBotao1 == LOW)
+  {
+    Serial.print("Temperatura atual é: ");
+    Serial.print(temp);
+    Serial.println(" °C");
+    servo.write(170);
+  }
+
+  if (estadoAnteriorBotao2 == HIGH && estadoAtualBotao2 == LOW)
+  {
+    Serial.print("Temperatura atual é: ");
+    Serial.print(temp);
+    Serial.println(" °C");
+    servo.write(10);
+  }
+
+  estadoAnteriorBotao1 = estadoAtualBotao1;
+  estadoAnteriorBotao2 = estadoAtualBotao2;
+
+  delay(50);
+}
