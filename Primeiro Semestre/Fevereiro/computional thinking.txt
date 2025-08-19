@@ -1,0 +1,24 @@
+1: Acordar se arrumar e se preparar
+2: Sair de casa
+3:Passo 0: Acompanhar site de notícias para saber de eventuais greves ou contratempos no transporte público, assim como se prevenir de imprevistos notórios
+Passo 1: Deixar tudo o que vai usar ou levar pronto no dia anterior
+Passo 2: Acordar em algum horário em que eu não se atrase (dependendo da distancia de onde o individuo mora e dos transportes disponíveis), com despertadores, desligando-os logo após.
+Passo 3: Tomar café da manhã
+Passo 4: Se vestir de acordo com as normas do Senai e do clima
+Passo 5: Pegar os seus objetos pessoais como celular, carteira, mochila, chaves e entre outros dependendo das variáveis
+Passo 6: Conferir se pegou o necessário para sair e se não há algum compromisso mais urgente que a aula
+Passo 7: Sair de casa, trancar o portão e se dirigir em direção ao ponto de transporte de preferência e aguardar o transporte chegar
+Passo 8: Entrar no transporte publico que tenha como destino o mais próximo possível do objetivo a (Rua Niterói 500 - São Caetano do Sul), seja trem, ônibus, metro e baldeações (caso hajam)
+Passo 9: Aguardar até que se chegue ao ponto desejado
+Passo 10: Sair do transporte público no ponto que desça perto do Senai 
+Passo 11: Caminhar o restante do caminho ao Senai na Rua Niterói 180
+Passo 12: Aguardar em frente a sala pelos professores, de preferência com pelo menos 5 minutos de antecedência
+
+CONDICIONAIS E OPCIONAIS
+
+
+Passo 3: Não obrigatório, mas recomendado e encorajado
+Em caso de chuva forte: Não ir
+Em caso raro de frio: Passo 4 incluirá roupas grossas
+Em caso de calor: Passo 4 incluirá roupas leves, mas a calça continuará obrigatória
+Em caso de machucados no pé: ignorar todos os passos e não ir, ou pedir um Uber

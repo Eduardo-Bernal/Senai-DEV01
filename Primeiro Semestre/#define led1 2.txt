@@ -1,0 +1,31 @@
+#define led1 2
+#define led2 3
+#define led3 4
+
+int botao = 7;
+
+void setup() {
+    pinMode(led1, OUTPUT);
+    pinMode(led2, OUTPUT);
+    pinMode(led3, OUTPUT);
+
+  pinMode(botao, INPUT_PULLUP);
+
+
+void loop() {
+  if (digitalRead(botao) == LOW) {
+    for (int i = 0; i < 3; i++) {
+      digitalWrite(leds[i], HIGH);
+      delay(500);
+    }
+    for (int i = 2; i >= 0; i--) {
+      digitalWrite(leds[i], LOW);
+      delay(500);
+    }
+  } 
+  else {
+    for (int i = 0; i < 3; i++) {
+      digitalWrite(leds[i], LOW);
+    }
+  }
+}

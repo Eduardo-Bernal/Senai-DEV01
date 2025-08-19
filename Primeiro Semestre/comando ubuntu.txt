@@ -1,0 +1,40 @@
+Linux comando
+
+sudo usermod -aG administrador vitor
+sudo adduser
+sudo addgroup
+sudo chmod pasta user
+sudo chgrp -R grupo pasta
+sudo chown :grupo pasta
+
+sudo systemctl status
+
+sudo apt install apache2
+sudo apt update
+sudo apt upgrade
+
+sudo ufw allow 'Apache2 Full'
+sudo ufw allow 'OpenSSH'
+
+echo "<h1> site1 </h1>" | sudo tee /var/www/site/index.html
+
+copiar e mudar o default
+/etc/apache2/sites-available
+sudo cp 000-default.conf site1.conf
+sudo nano site1.conf
+
+localhost
+sudo nano /etc/hosts
+127.0.0.1 site1.local
+
+sudo a2ensite site1.conf
+
+config da porta
+sudo nano /etc/apache2/ports.conf
+sudo nano /etc/apache2/sites-available/site1.conf
+
+tem q liberar no grupo de segurança da aws
+
+
+
+

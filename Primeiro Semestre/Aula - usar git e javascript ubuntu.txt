@@ -1,0 +1,102 @@
+Aula - usar git e javascript ubuntu
+
+Iniciamos uma nova maquina
+
+Passo 1
+
+sudo apt update
+sudo apt upgrade
+sudo apt install apache2 -y 
+sudo apt install nodejs -y 
+
+Verificar versão
+node -v 	
+
+Passo 2
+gerenciador de pacotes do nodejs
+
+npm
+
+sudo apt install npm -y
+
+npm -v
+
+Passo 3 Instalar Git
+
+sudo pat install git -y
+
+cd /var/www
+
+Passo 4 - clonar jogo desse repositorio
+
+sudo git clone https://github.com/simondiep/node-multiplayer-snake.git
+
+passo 5 - mudar o dono da pasta para ter a propriedade dela
+
+sudo chown -R $USER:USER node-multiplayer-snake
+
+cd node-multiplayer-snake/
+
+
+passo 6 - baixar dependências do projeto
+
+npm install
+
+node app.js //colocou a aplicação para rodar na porta 3000
+
+passo 7 - instalar um gerenciador de processos
+
+ sudo npm install -g pm2
+
+passo 8 - inicializar o jogo da cobrinha
+
+ pm2 start app.js --name jogo_da_cobrinha
+
+ pm2 startup
+
+ sudo env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
+
+ pm2 save
+
+passo 9 - liberar porta na AWS
+
+criar porta 3000 nos grupos de segurança
+
+pronto jogo ja esta funcionando
+
+passo 10 - iniciar proxy
+
+sudo a2enmod proxy
+
+sudo a2enmod proxy_http
+
+sudo systemctl apache2
+
+passo 11 - editar default para redirecionar para a porta 3000 quando a pessoa entrar no site
+
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+
+        ProxyPreserveHost On
+        ProxyPass / http://localhost:3000/
+        ProxyPassReverse / http://localhost:3000/
+
+sudo systemctl restart apache2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

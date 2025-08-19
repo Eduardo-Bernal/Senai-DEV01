@@ -1,0 +1,43 @@
+
+#include <Arduino.h>
+#include <ESP32Servo.h>
+#include <DHT.h>
+
+#define DHTPIN 18
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+Servo servo;
+
+void setup()
+{
+  Serial.begin(9600);
+  dht.begin();
+  servo.attach(4);
+}
+
+void loop()
+{
+  float temp = dht.readTemperature();
+
+  if (isnan(temp))
+  {
+    Serial.println("Erro ao ler o sensor");
+    return;
+  }
+
+  Serial.print("Temperatura atual é: ");
+  Serial.print(temp);
+  Serial.println(" °C");
+
+  if (temp > 28.0)
+  {
+    servo.write(170);
+  }
+  else
+  {
+    servo.write(10);
+  }
+
+  delay(2000); 
+}
